@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 var program = require('commander');
+var jimp = require('jimp');
 
 program
   .version('0.13.0')
@@ -14,6 +15,7 @@ program
     'Hashing type sha1, md5. Must be used with -d'
   )
   .option('-w, --width [width]', 'Thumbnail width in pixels. Default: 800', 800)
+  .option('-h, --height [height]','Thumbnail height in pixels. Default: AUTO', jimp.AUTO)
   .option(
     '-c, --concurrency [num]',
     'Number of workers (defaults to num of CPUs)'

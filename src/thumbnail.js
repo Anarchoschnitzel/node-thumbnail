@@ -28,6 +28,7 @@ defaults = {
   digest: false,
   hashingType: 'sha1',
   width: 800,
+  height: jimp.AUTO,
   concurrency: os.cpus().length,
   quiet: false,
   overwrite: false,
@@ -44,8 +45,7 @@ resizer = function(options, callback) {
     if (err) {
       throw err;
     }
-
-    file.resize(options.width, jimp.AUTO);
+    file.resize(options.width, options.height);
     file.write(options.dstPath, callback);
   });
 };
@@ -153,6 +153,7 @@ run = function(settings, resolve, reject) {
     options = {
       srcPath: path.join(settings.source, image),
       width: settings.width,
+      height: settings.height,
       basename: settings.basename
     };
 
@@ -180,6 +181,7 @@ exports.thumb = function(options, callback) {
     }
 
     settings.width = parseInt(settings.width, 10);
+    settings.height = parseInt(settings.height, 10);
 
     var sourceExists = fs.existsSync(options.source);
     var destExists = fs.existsSync(options.destination);
